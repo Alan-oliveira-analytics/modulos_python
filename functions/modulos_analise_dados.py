@@ -69,3 +69,29 @@ def tabela_freq_var_str(df, variavel_df, numero_elementos = 2):
     
     tabela_frequencia = pd.DataFrame({'Frequência absoluta': freq_absoluta, 'Frequência relativa': freq_relativa, 'Frequência acumulada': freq_acumulada})
     return tabela_frequencia
+
+
+def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_elementos=2):
+    # Soma total de gastos por variavel
+    gastos_totais = df.groupby(coluna_variavel)[coluna_numerica].sum().sort_values(ascending=False)
+
+    # Cálculo das frequências relativas
+    percentual_relativo = (gastos_totais / gastos_totais.sum()) * 100
+
+    # Cálculo da frequência acumulada
+    percentual_acumulado = percentual_relativo.cumsum()
+
+    # Monta o dataframe de retorno
+    if numero_elementos == 2:
+        tabela = pd.DataFrame({
+            'Gasto total': gastos_totais,
+            'Percentual sobre o total (%)': percentual_relativo
+        })
+    else:
+        tabela = pd.DataFrame({
+            'Gasto total': gastos_totais,
+            'Percentual sobre o total (%)': percentual_relativo,
+            'Percentual acumulado (%)': percentual_acumulado
+        })
+
+    return tabela
