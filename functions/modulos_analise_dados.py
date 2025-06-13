@@ -86,12 +86,12 @@ def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_ele
         tabela = pd.DataFrame({
             'Gasto total': gastos_totais,
             'Percentual sobre o total (%)': percentual_relativo
-        })
+        }).reset_index()
     else:
         tabela = pd.DataFrame({
             'Gasto total': gastos_totais,
             'Percentual sobre o total (%)': percentual_relativo,
             'Percentual acumulado (%)': percentual_acumulado
-        })
+        }).reset_index()
 
     return tabela
