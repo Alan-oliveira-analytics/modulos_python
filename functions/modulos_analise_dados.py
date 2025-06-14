@@ -85,10 +85,9 @@ def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_ele
     gastos_totais['Gasto total (R$)'] = gastos_totais[coluna_numerica].apply(lambda x: f"R${x:,.2f}".replace(",", "v").replace(".", ",").replace("v", "."))
     gastos_totais['Percentual sobre o total (%)'] = percentual_relativo.apply(lambda x: f"{x:.2f}%")
 
-    # adiciona coluna ao df
-    gastos_totais['Percentual sobre o total (%)'] = percentual_relativo
-
     if numero_elementos != 2:
-        gastos_totais['Percentual acumulado (%)'] = percentual_acumulado
+        gastos_totais['Percentual acumulado (%)'] = percentual_acumulado.apply(lambda x: f"{x:.2f}%")
 
+    gastos_totais = gastos_totais.drop(columns=[coluna_numerica])
+    
     return gastos_totais
