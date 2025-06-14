@@ -76,7 +76,7 @@ def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_ele
     gastos_totais = df.groupby(coluna_variavel)[coluna_numerica].sum().sort_values(ascending=False).reset_index()
 
     # Cálculo das frequências relativas
-    percentual_relativo = (gastos_totais / gastos_totais.sum()) * 100
+    percentual_relativo = (gastos_totais[coluna_numerica] / gastos_totais[coluna_numerica].sum()) * 100
 
     # Cálculo da frequência acumulada
     percentual_acumulado = percentual_relativo.cumsum()
