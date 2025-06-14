@@ -81,6 +81,10 @@ def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_ele
     # Cálculo da frequência acumulada
     percentual_acumulado = percentual_relativo.cumsum()
 
+    # formatações
+    gastos_totais['Gasto total (R$)'] = gastos_totais[coluna_numerica].apply(lambda x: f"R${x:,.2f}".replace(",", "v").replace(".", ",").replace("v", "."))
+    gastos_totais['Percentual sobre o total (%)'] = percentual_relativo.apply(lambda x: f"{x:.2f}%")
+
     # adiciona coluna ao df
     gastos_totais['Percentual sobre o total (%)'] = percentual_relativo
 
