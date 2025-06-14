@@ -81,17 +81,10 @@ def tabela_frequencia_bilateral(df, coluna_variavel, coluna_numerica, numero_ele
     # Cálculo da frequência acumulada
     percentual_acumulado = percentual_relativo.cumsum()
 
-    # Monta o dataframe de retorno
-    if numero_elementos == 2:
-        tabela = pd.DataFrame({
-            'Gasto total': gastos_totais,
-            'Percentual sobre o total (%)': percentual_relativo
-        })
-    else:
-        tabela = pd.DataFrame({
-            'Gasto total': gastos_totais,
-            'Percentual sobre o total (%)': percentual_relativo,
-            'Percentual acumulado (%)': percentual_acumulado
-        })
+    # adiciona coluna ao df
+    gastos_totais['Percentual sobre o total (%)'] = percentual_relativo
 
-    return tabela
+    if numero_elementos != 2:
+        gastos_totais['Percentual acumulado (%)'] = percentual_acumulado
+
+    return gastos_totais
